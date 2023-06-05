@@ -1,15 +1,23 @@
 package com.lucsilva.taskbuddy.entities;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
 import java.io.Serializable;
 import java.util.Objects;
 
-public class User implements Serializable {
+@Entity
+public class UserAccount implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
     String name;
     String email;
     String password;
-    public User(){}
-    public User(Integer id, String name, String email,String password){
+    public UserAccount(){}
+    public UserAccount(Integer id, String name, String email,String password){
         this.id = id;
         this.name = name;
         this.email = email;
@@ -52,7 +60,7 @@ public class User implements Serializable {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
+        UserAccount user = (UserAccount) o;
         return Objects.equals(id, user.id);
     }
 
