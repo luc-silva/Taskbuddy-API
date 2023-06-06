@@ -1,12 +1,19 @@
 package com.lucsilva.taskbuddy.entities;
 
 import com.lucsilva.taskbuddy.entities.enums.Priority;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
 public class Project implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
     String title;
     String description;
