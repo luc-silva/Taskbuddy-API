@@ -1,12 +1,12 @@
 package com.lucsilva.taskbuddy.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class UserAccount implements Serializable {
@@ -16,6 +16,13 @@ public class UserAccount implements Serializable {
     String name;
     String email;
     String password;
+
+    @OneToMany
+    Set<Project> projects = new HashSet<>();
+
+    @OneToMany
+    Set<Todo> todos = new HashSet<>();
+
     public UserAccount(){}
     public UserAccount(Integer id, String name, String email,String password){
         this.id = id;
@@ -54,6 +61,10 @@ public class UserAccount implements Serializable {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Set<Project> getProjects() {
+        return projects;
     }
 
     @Override

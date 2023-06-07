@@ -1,11 +1,9 @@
 package com.lucsilva.taskbuddy.entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucsilva.taskbuddy.entities.enums.Priority;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -16,13 +14,22 @@ public class Todo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
+
+    @ManyToOne
+    @JsonIgnore
+    UserAccount user;
+
     String text;
     Boolean concluded;
     Date deadline;
     Priority priority;
-    public Todo(){}
-    public  Todo(Integer id, String text, Boolean concluded, Date deadline, Priority priority){
+
+    public Todo() {
+    }
+
+    public Todo(Integer id, UserAccount user, String text, Boolean concluded, Date deadline, Priority priority) {
         this.id = id;
+        this.user = user;
         this.text = text;
         this.concluded = concluded;
         this.deadline = deadline;
@@ -67,6 +74,10 @@ public class Todo implements Serializable {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public UserAccount getUser() {
+        return user;
     }
 
     @Override

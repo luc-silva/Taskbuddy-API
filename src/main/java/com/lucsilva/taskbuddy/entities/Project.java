@@ -1,28 +1,40 @@
 package com.lucsilva.taskbuddy.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucsilva.taskbuddy.entities.enums.Priority;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class Project implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
+
+    @ManyToOne
+    @JsonIgnore
+    @JoinColumn(name = "USER_ID")
+    UserAccount user;
+
+    @OneToMany
+    Set<ProjectTask> projectTasks = new HashSet<>();
+
     String title;
     String description;
     Date deadline;
     Priority priority;
 
-    public Project(){}
-    public Project(Integer id, String title, String description, Date deadline, Priority priority){
+    public Project() {
+    }
+
+    public Project(Integer id, UserAccount user, String title, String description, Date deadline, Priority priority) {
         this.id = id;
+        this.user = user;
         this.title = title;
         this.description = description;
         this.deadline = deadline;
@@ -67,6 +79,14 @@ public class Project implements Serializable {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public UserAccount getUser() {
+        return user;
+    }
+
+    public Set<ProjectTask> getProjectTasks() {
+        return projectTasks;
     }
 
     @Override

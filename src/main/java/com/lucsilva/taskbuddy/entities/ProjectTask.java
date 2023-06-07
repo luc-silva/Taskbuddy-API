@@ -1,10 +1,8 @@
 package com.lucsilva.taskbuddy.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucsilva.taskbuddy.entities.enums.Priority;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -17,11 +15,16 @@ public class ProjectTask implements Serializable {
     String title;
     Priority priority;
 
+    @JsonIgnore
+    @ManyToOne
+    Project project;
+
     public ProjectTask(){}
-    public ProjectTask(Integer id,String title, Priority priority){
+    public ProjectTask(Integer id,String title, Priority priority, Project project){
         this.id = id;
         this.title = title;
         this.priority = priority;
+        this.project = project;
     }
 
     public Integer getId() {
@@ -46,6 +49,10 @@ public class ProjectTask implements Serializable {
 
     public void setPriority(Priority priority) {
         this.priority = priority;
+    }
+
+    public Project getProject(){
+        return project;
     }
 
     @Override
