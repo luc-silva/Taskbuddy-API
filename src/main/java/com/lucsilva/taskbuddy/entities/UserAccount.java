@@ -17,10 +17,10 @@ public class UserAccount implements Serializable {
     String email;
     String password;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     Set<Project> projects = new HashSet<>();
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     Set<Todo> todos = new HashSet<>();
 
     public UserAccount(){}

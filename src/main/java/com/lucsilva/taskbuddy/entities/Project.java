@@ -21,7 +21,7 @@ public class Project implements Serializable {
     @JoinColumn(name = "USER_ID")
     UserAccount user;
 
-    @OneToMany
+    @OneToMany(mappedBy = "project")
     Set<ProjectTask> projectTasks = new HashSet<>();
 
     String title;
