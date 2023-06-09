@@ -8,10 +8,7 @@ import com.lucsilva.taskbuddy.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 public class ProjectService {
@@ -25,7 +22,7 @@ public class ProjectService {
     ProjectTaskRepository projectTaskRepository;
 
     public void createProject(Project project) {
-        if(project.getProjectTasks().isEmpty() ){
+        if (project.getProjectTasks().isEmpty()) {
             throw new IllegalArgumentException("Project must have at least one task.");
         }
         projectRepository.save(project);

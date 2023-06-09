@@ -22,12 +22,14 @@ public class ProjectTask implements Serializable {
 
     public ProjectTask() {
     }
-    public ProjectTask (Integer id, String title, Priority priority, Project project) {
+
+    public ProjectTask(Integer id, String title, Priority priority, Project project) {
         this.id = id;
         this.title = title;
         this.priority = priority;
         this.project = project;
     }
+
     public ProjectTask(Integer id, String title, Priority priority, Project project, Boolean completed) {
         this.id = id;
         this.title = title;

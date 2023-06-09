@@ -23,8 +23,10 @@ public class UserAccount implements Serializable {
     @OneToMany(mappedBy = "user")
     Set<Todo> todos = new HashSet<>();
 
-    public UserAccount(){}
-    public UserAccount(Integer id, String name, String email,String password){
+    public UserAccount() {
+    }
+
+    public UserAccount(Integer id, String name, String email, String password) {
         this.id = id;
         this.name = name;
         this.email = email;

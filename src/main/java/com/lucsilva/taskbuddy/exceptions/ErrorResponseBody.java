@@ -7,12 +7,16 @@ import java.io.Serializable;
 public class ErrorResponseBody implements Serializable {
     String message;
     HttpStatus status;
-    public ErrorResponseBody(){}
-    public ErrorResponseBody(String message, HttpStatus  status){
+
+    public ErrorResponseBody() {
+    }
+
+    public ErrorResponseBody(String message, HttpStatus status) {
         this.message = message;
         this.status = status;
     }
-    public ErrorResponseBody(String message, int status){
+
+    public ErrorResponseBody(String message, int status) {
         this.message = message;
         this.status = HttpStatus.valueOf(status);
     }

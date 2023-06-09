@@ -12,5 +12,5 @@ public interface ProjectTaskRepository extends JpaRepository<ProjectTask, Intege
     @Transactional
     @Modifying
     @Query("UPDATE ProjectTask SET completed = ?2 WHERE id = ?1")
-    public void updateProjectTaskById(Integer id, Boolean completed );
+    public void updateProjectTaskById(Integer id, Boolean completed);
 }
