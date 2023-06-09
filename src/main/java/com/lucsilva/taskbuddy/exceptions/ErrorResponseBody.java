@@ -1,4 +1,4 @@
-package com.lucsilva.taskbuddy.repositories.exceptions;
+package com.lucsilva.taskbuddy.exceptions;
 
 import org.springframework.http.HttpStatus;
 

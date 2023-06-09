@@ -1,7 +1,7 @@
-package com.lucsilva.taskbuddy.resources.exceptions;
+package com.lucsilva.taskbuddy.exceptions;
 
-import com.lucsilva.taskbuddy.repositories.exceptions.ErrorResponseBody;
-import com.lucsilva.taskbuddy.repositories.exceptions.NotFound;
+import com.lucsilva.taskbuddy.exceptions.ErrorResponseBody;
+import com.lucsilva.taskbuddy.exceptions.NotFound;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
