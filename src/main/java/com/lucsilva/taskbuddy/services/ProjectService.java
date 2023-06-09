@@ -3,10 +3,13 @@ package com.lucsilva.taskbuddy.services;
 import com.lucsilva.taskbuddy.entities.Project;
 import com.lucsilva.taskbuddy.entities.UserAccount;
 import com.lucsilva.taskbuddy.repositories.ProjectRepository;
+import com.lucsilva.taskbuddy.repositories.ProjectTaskRepository;
 import com.lucsilva.taskbuddy.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
 
@@ -18,13 +21,16 @@ public class ProjectService {
     @Autowired
     UserRepository userRepository;
 
-    public void createProject(Project project) {
-        projectRepository.save(project);
-    }
+    @Autowired
+    ProjectTaskRepository projectTaskRepository;
 
-    //TODO: move to userService
-    public Set<Project> listUserProjects(Integer id) {
-        return projectRepository.listUserProjects(id);
+    public void createProject(Project project) {
+        if(project.getProjectTasks().isEmpty() ){
+            throw new IllegalArgumentException("Project must have at least one task.");
+        }
+        projectRepository.save(project);
+        projectTaskRepository.saveAll(project.getProjectTasks());
+
     }
 
     public void updateProject(Project updatedProject) {
