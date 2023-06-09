@@ -1,18 +1,24 @@
 package com.lucsilva.taskbuddy.services;
 
+import com.lucsilva.taskbuddy.entities.Project;
 import com.lucsilva.taskbuddy.entities.UserAccount;
 import com.lucsilva.taskbuddy.exceptions.NotAuthenticated;
+import com.lucsilva.taskbuddy.repositories.ProjectRepository;
 import com.lucsilva.taskbuddy.repositories.UserRepository;
 import com.lucsilva.taskbuddy.exceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class UserService {
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    ProjectRepository projectRepository;
 
     public void createAccount(UserAccount userAccount) {
         userRepository.save(userAccount);
@@ -37,6 +43,10 @@ public class UserService {
         } else {
             return user.get();
         }
+    }
+
+    public  Set<Project> listUserProjects(Integer id) {
+        return projectRepository.listUserProjects(id);
     }
 
 }

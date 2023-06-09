@@ -1,10 +1,13 @@
 package com.lucsilva.taskbuddy.resources;
 
+import com.lucsilva.taskbuddy.entities.Project;
 import com.lucsilva.taskbuddy.entities.UserAccount;
 import com.lucsilva.taskbuddy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.Set;
 
 @RestController
 @RequestMapping("api/user")
@@ -29,5 +32,11 @@ public class UserResource {
     public ResponseEntity<?> getUserDetails(@PathVariable String id){
         UserAccount userAccount = userService.getUserById(Integer.valueOf(id));
         return ResponseEntity.ok().body(userAccount);
+    }
+
+    @GetMapping("/{id}/projects")
+    public ResponseEntity<Set<Project>> getUserProjects(@PathVariable String id){
+        Set<Project> projects = userService.listUserProjects(Integer.valueOf(id));
+        return ResponseEntity.ok().body(projects);
     }
 }
