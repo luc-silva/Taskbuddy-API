@@ -1,7 +1,9 @@
 package com.lucsilva.taskbuddy.services;
 
 import com.lucsilva.taskbuddy.entities.UserAccount;
+import com.lucsilva.taskbuddy.exceptions.NotAuthenticated;
 import com.lucsilva.taskbuddy.repositories.UserRepository;
+import com.lucsilva.taskbuddy.exceptions.NotFound;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +14,29 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    public UserAccount createAccount(UserAccount userAccount) {
-        return userRepository.save(userAccount);
+    public void createAccount(UserAccount userAccount) {
+        userRepository.save(userAccount);
     }
 
-    public UserAccount getAccountByEmail(String email){
-        return userRepository.getUserAccountByEmail(email);
+    public UserAccount getAccountByEmailAndValidate(UserAccount credentials){
+        Optional<UserAccount> possibleUser = userRepository.getUserAccountByEmail(credentials.getEmail());
+        if(possibleUser.isEmpty()){
+            throw new NotFound("User not found with given email.");
+        }
+        UserAccount user = possibleUser.get();
+        if(!user.getPassword().equals(credentials.getPassword())){
+            throw new NotAuthenticated("Wrong Password.");
+        }
+        return user;
     }
 
     public  UserAccount getUserById(Integer id){
-        Optional<UserAccount> userAccount = userRepository.findById(id);
-        //returns null if null (duh)
-        return userAccount.orElse(null);
+        Optional<UserAccount> user = userRepository.findById(id);
+        if(user.isEmpty()){
+            throw new NotFound("User not found.");
+        } else {
+            return user.get();
+        }
     }
 
 }
