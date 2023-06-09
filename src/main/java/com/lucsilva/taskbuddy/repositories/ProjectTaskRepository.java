@@ -1,5 +1,6 @@
 package com.lucsilva.taskbuddy.repositories;
 
+import com.lucsilva.taskbuddy.entities.Project;
 import com.lucsilva.taskbuddy.entities.ProjectTask;
 import jakarta.transaction.Transactional;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,7 +11,6 @@ public interface ProjectTaskRepository extends JpaRepository<ProjectTask, Intege
 
     @Transactional
     @Modifying
-    @Query("UPDATE ProjectTask pt SET pt.completed = ?1 WHERE pt.id = ?2")
-    public void updateProjectById(Boolean isCompleted, Integer id);
-
+    @Query("UPDATE ProjectTask SET completed = ?2 WHERE id = ?1")
+    public void updateProjectTaskById(Integer id, Boolean completed );
 }
