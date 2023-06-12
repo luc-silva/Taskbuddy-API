@@ -18,6 +18,7 @@ public class ProjectTask implements Serializable {
 
     @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "project_id")
     Project project;
 
     public ProjectTask() {

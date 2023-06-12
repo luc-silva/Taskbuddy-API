@@ -1,5 +1,6 @@
 package com.lucsilva.taskbuddy.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -17,15 +18,19 @@ public class UserAccount implements Serializable {
     String email;
     String password;
 
-    @OneToMany(mappedBy = "user")
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     Set<Project> projects = new HashSet<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     Set<Todo> todos = new HashSet<>();
 
     public UserAccount() {
     }
-
+    public UserAccount (Integer id){
+        this.id = id;
+    }
     public UserAccount(Integer id, String name, String email, String password) {
         this.id = id;
         this.name = name;

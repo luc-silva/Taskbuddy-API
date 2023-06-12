@@ -17,7 +17,6 @@ public class Project implements Serializable {
     Integer id;
 
     @ManyToOne
-    @JsonIgnore
     @JoinColumn(name = "USER_ID")
     UserAccount user;
 
@@ -106,6 +105,8 @@ public class Project implements Serializable {
     public String toString() {
         return "Project{" +
                 "id=" + id +
+                ", user=" + user +
+                ", projectTasks=" + projectTasks +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
                 ", deadline=" + deadline +
