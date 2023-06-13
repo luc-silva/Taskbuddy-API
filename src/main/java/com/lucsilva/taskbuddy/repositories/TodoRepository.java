@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.Set;
 
 public interface TodoRepository extends JpaRepository<Todo, Integer> {
-    @Query("SELECT Todo FROM Todo WHERE user = ?1")
+    @Query("SELECT td FROM Todo td WHERE td.user.id = ?1")
     public Set<Todo> listUserTodos(Integer userId);
 
     @Transactional

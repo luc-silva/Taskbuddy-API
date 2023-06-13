@@ -1,6 +1,7 @@
 package com.lucsilva.taskbuddy.resources;
 
 import com.lucsilva.taskbuddy.entities.Project;
+import com.lucsilva.taskbuddy.entities.Todo;
 import com.lucsilva.taskbuddy.entities.UserAccount;
 import com.lucsilva.taskbuddy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,5 +39,11 @@ public class UserResource {
     public ResponseEntity<Set<Project>> getUserProjects(@PathVariable Integer id){
         Set<Project> projects = userService.listUserProjects(id);
         return ResponseEntity.ok().body(projects);
+    }
+
+    @GetMapping("/{id}/todos")
+    public ResponseEntity<Set<Todo>> getUserTodos(@PathVariable Integer id){
+        Set<Todo> todos = userService.listUserTodos(id);
+        return ResponseEntity.ok().body(todos);
     }
 }
