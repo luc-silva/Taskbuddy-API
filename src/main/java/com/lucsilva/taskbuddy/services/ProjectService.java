@@ -77,6 +77,8 @@ public class ProjectService {
             Set<ProjectTask> projectTask = projectTaskRepository.getProjectTaskByProjectId(projectFound.getId());
             projectTaskRepository.deleteAll(projectTask);
             projectRepository.delete(project.get());
+        } else {
+            throw new NotFound("Project not found.");
         }
 
     }
