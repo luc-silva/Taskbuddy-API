@@ -23,14 +23,12 @@ public class UserAccount implements Serializable {
     Set<Project> projects = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     Set<Todo> todos = new HashSet<>();
 
     public UserAccount() {
     }
-    public UserAccount (Integer id){
-        this.id = id;
-    }
+
     public UserAccount(Integer id, String name, String email, String password) {
         this.id = id;
         this.name = name;
@@ -72,6 +70,10 @@ public class UserAccount implements Serializable {
 
     public Set<Project> getProjects() {
         return projects;
+    }
+
+    public Set<Todo> getTodos() {
+        return todos;
     }
 
     @Override
