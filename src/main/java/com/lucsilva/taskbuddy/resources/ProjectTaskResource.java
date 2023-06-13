@@ -16,8 +16,8 @@ public class ProjectTaskResource {
     ProjectService projectService;
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateProjectTask(@PathVariable String id, @RequestBody ProjectTask projectTask){
-        projectTaskService.updateProjectTask(projectTask, Integer.valueOf(id));
+    public ResponseEntity<?> updateProjectTask(@PathVariable Integer id, @RequestBody ProjectTask projectTask){
+        projectTaskService.updateProjectTask(projectTask, id);
         return ResponseEntity.ok().body("Feito.");
     }
 

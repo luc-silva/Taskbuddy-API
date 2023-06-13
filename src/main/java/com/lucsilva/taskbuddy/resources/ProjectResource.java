@@ -25,8 +25,8 @@ public class ProjectResource {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteProject(@PathVariable String id) {
-        projectService.deleteProjectById(Integer.valueOf(id));
+    public ResponseEntity<?> deleteProject(@PathVariable Integer id) {
+        projectService.deleteProjectById(id);
         return ResponseEntity.ok().body("Feito.");
     }
 }

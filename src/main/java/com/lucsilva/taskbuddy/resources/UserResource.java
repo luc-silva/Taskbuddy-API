@@ -29,14 +29,14 @@ public class UserResource {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<?> getUserDetails(@PathVariable String id){
-        UserAccount userAccount = userService.getUserById(Integer.valueOf(id));
+    public ResponseEntity<?> getUserDetails(@PathVariable Integer id){
+        UserAccount userAccount = userService.getUserById(id);
         return ResponseEntity.ok().body(userAccount);
     }
 
     @GetMapping("/{id}/projects")
-    public ResponseEntity<Set<Project>> getUserProjects(@PathVariable String id){
-        Set<Project> projects = userService.listUserProjects(Integer.valueOf(id));
+    public ResponseEntity<Set<Project>> getUserProjects(@PathVariable Integer id){
+        Set<Project> projects = userService.listUserProjects(id);
         return ResponseEntity.ok().body(projects);
     }
 }
