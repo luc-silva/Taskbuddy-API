@@ -19,7 +19,7 @@ public class UserResource {
     @PostMapping("/create")
     public ResponseEntity<?> createUser(@RequestBody UserAccount userAccount) {
         userService.createAccount(userAccount);
-        return ResponseEntity.ok().body("Feito.");
+        return ResponseEntity.ok().body("Done.");
     }
 
     @PostMapping("/login")

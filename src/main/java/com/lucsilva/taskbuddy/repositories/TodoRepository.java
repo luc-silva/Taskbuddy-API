@@ -10,7 +10,7 @@ import java.util.Set;
 
 public interface TodoRepository extends JpaRepository<Todo, Integer> {
     @Query("SELECT Todo FROM Todo WHERE user = ?1")
-    public Set<Todo> listUSerTodos(Integer userId);
+    public Set<Todo> listUserTodos(Integer userId);
 
     @Transactional
     @Modifying

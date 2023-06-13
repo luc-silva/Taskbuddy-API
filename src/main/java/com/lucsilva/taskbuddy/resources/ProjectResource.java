@@ -15,18 +15,18 @@ public class ProjectResource {
     @PostMapping("/")
     public ResponseEntity<?> createProject(@RequestBody Project project) {
         projectService.createProject(project);
-        return ResponseEntity.ok().body("Feito.");
+        return ResponseEntity.ok().body("Done.");
     }
 
     @PutMapping("/")
     public ResponseEntity<?> updateProject(@RequestBody Project updatedProject) {
         projectService.updateProject(updatedProject);
-        return ResponseEntity.ok().body("Feito.");
+        return ResponseEntity.ok().body("Done.");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProject(@PathVariable Integer id) {
         projectService.deleteProjectById(id);
-        return ResponseEntity.ok().body("Feito.");
+        return ResponseEntity.ok().body("Done.");
     }
 }
