@@ -12,6 +12,12 @@ public class ProjectResource {
     @Autowired
     ProjectService projectService;
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Project> getProject(@PathVariable Integer id){
+        Project project = projectService.getProjectById(id);
+        return ResponseEntity.ok().body(project);
+    }
+
     @PostMapping("/")
     public ResponseEntity<?> createProject(@RequestBody Project project) {
         projectService.createProject(project);

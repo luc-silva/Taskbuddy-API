@@ -26,6 +26,15 @@ public class ProjectService {
     @Autowired
     ProjectTaskRepository projectTaskRepository;
 
+    public Project getProjectById(Integer id){
+        Optional<Project> project = projectRepository.findById(id);
+        if(project.isEmpty()){
+            throw new NotFound("Project not found.");
+        }
+
+        return project.get();
+    }
+
     public void createProject(Project project) {
         if (project.getProjectTasks().isEmpty()) {
             throw new IllegalArgumentException("Project must have at least one task.");
