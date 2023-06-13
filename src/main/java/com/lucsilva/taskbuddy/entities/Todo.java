@@ -16,7 +16,6 @@ public class Todo implements Serializable {
     Integer id;
 
     @ManyToOne
-    @JsonIgnore
     UserAccount user;
 
     String text;
