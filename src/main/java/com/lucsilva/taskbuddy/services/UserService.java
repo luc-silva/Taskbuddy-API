@@ -54,7 +54,13 @@ public class UserService {
         return projectRepository.listUserProjects(id);
     }
     public  Set<Todo> listUserTodos(Integer id) {
-        return todoRepository.listUserTodos(id);
+        Optional<UserAccount> userAccount = userRepository.findById(id);
+        if(userAccount.isEmpty()){
+            throw new NotFound("User not found.");
+        }
+        UserAccount user = userAccount.get();
+
+        return todoRepository.listUserTodos(user.getId());
     }
 
 }
