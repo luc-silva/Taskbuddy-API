@@ -69,7 +69,7 @@ public class ProjectService {
             Project projectFound = project.get();
             Optional<UserAccount> projectOwner = userRepository.findById(projectFound.getUser().getId());
             if(projectOwner.isEmpty()){
-                throw new NotFound();
+                throw new NotFound("User not found.");
             }
             UserAccount user = projectOwner.get();
             user.getProjects().remove(project.get());

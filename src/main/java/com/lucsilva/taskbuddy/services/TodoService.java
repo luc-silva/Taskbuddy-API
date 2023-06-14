@@ -23,7 +23,7 @@ public class TodoService {
         }
         Optional<UserAccount> userAccount = userRepository.findById(todo.getUser().getId());
         if(userAccount.isEmpty()){
-            throw new NotFound();
+            throw new NotFound("User not found.");
         }
 
         UserAccount user = userAccount.get();
@@ -40,7 +40,7 @@ public class TodoService {
     public Todo getTodoById(Integer id){
         Optional<Todo> todo = todoRepository.findById(id);
         if(todo.isEmpty()){
-            throw new NotFound();
+            throw new NotFound("To-do not found.");
         }
         return todo.get();
     }
