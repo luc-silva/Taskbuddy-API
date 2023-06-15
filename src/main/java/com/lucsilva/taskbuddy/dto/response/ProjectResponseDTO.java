@@ -46,6 +46,14 @@ public class ProjectResponseDTO {
                 p.getDeadline(), p.getPriority(), userDto, ptsDto);
     }
 
+    public static Set<ProjectResponseDTO> convertSetToDto(Set<Project> projects){
+        Set<ProjectResponseDTO> dtos = new HashSet<>();
+        for(Project p : projects){
+            dtos.add(ProjectResponseDTO.convertToDto(p));
+        }
+        return dtos;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -97,5 +105,4 @@ public class ProjectResponseDTO {
     public Set<ProjectTaskResponseDTO> getProjectTasks() {
         return projectTasks;
     }
-    //criar DTOs do Todo e alterar tipos de retorno
 }
