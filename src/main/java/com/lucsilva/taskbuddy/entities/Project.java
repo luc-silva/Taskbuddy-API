@@ -1,6 +1,7 @@
 package com.lucsilva.taskbuddy.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.lucsilva.taskbuddy.dto.request.UserAccountRequestDTO;
 import com.lucsilva.taskbuddy.entities.enums.Priority;
 import jakarta.persistence.*;
 
@@ -29,6 +30,15 @@ public class Project implements Serializable {
     Priority priority;
 
     public Project() {
+    }
+
+    public Project(UserAccount user, Set<ProjectTask> pts, String title, String dt, Date dl, Priority p ){
+        this.user = user;
+        getProjectTasks().addAll(pts);
+        this.title = title;
+        this.description = dt;
+        this.deadline = dl;
+        this.priority = p;
     }
 
     public Project(Integer id, UserAccount user, String title, String description, Date deadline, Priority priority) {

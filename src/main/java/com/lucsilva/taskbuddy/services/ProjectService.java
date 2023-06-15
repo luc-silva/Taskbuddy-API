@@ -7,11 +7,9 @@ import com.lucsilva.taskbuddy.exceptions.NotFound;
 import com.lucsilva.taskbuddy.repositories.ProjectRepository;
 import com.lucsilva.taskbuddy.repositories.ProjectTaskRepository;
 import com.lucsilva.taskbuddy.repositories.UserRepository;
-import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.Set;
 
@@ -48,13 +46,14 @@ public class ProjectService {
             throw new NotFound("User not found.");
         }
         UserAccount projectOwner = userAccount.get();
-        projectOwner.getProjects().add(project);
 
+        for(ProjectTask pt : project.getProjectTasks()){
+            pt.setProject(project);
+        }
+        projectOwner.getProjects().add(project);
         projectRepository.save(project);
         projectTaskRepository.saveAll(project.getProjectTasks());
         userRepository.save(projectOwner);
-
-
     }
 
     public void updateProject(Project updatedProject) {

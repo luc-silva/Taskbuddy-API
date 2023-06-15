@@ -9,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-//criar dto
-//mexer no client se der tempo
 @Service
 public class ProjectTaskService {
     @Autowired
