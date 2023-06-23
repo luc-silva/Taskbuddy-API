@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+
 @Service
 public class ProjectTaskService {
     @Autowired
@@ -16,20 +17,26 @@ public class ProjectTaskService {
     @Autowired
     ProjectRepository projectRepository;
 
-    public void updateProjectTask(ProjectTask projectTaskData, Integer id) {
-        Optional<ProjectTask> possibleProjectTask = projectTaskRepository.findById(id);
-        if (possibleProjectTask.isEmpty()){
+    public ProjectTask getProjectTask(Integer id) {
+        Optional<ProjectTask> optionalProjectTask = projectTaskRepository.findById(id);
+        if (optionalProjectTask.isEmpty()) {
             throw new NotFound("Project Task not found.");
         }
+        ProjectTask projectTask = optionalProjectTask.get();
+        return projectTask;
+    }
 
-        ProjectTask projectTask = possibleProjectTask.get();
-        Project project = projectRepository.findById(projectTask.getProject().getId()).get();
+    public void updateProjectTask(ProjectTask projectTaskData, Integer id) {
+        Optional<ProjectTask> optionalProjectTask = projectTaskRepository.findById(id);
+        if (optionalProjectTask.isEmpty()) {
+            throw new NotFound("Project Task not found.");
+        }
+        ProjectTask projectTask = optionalProjectTask.get();
 
-        project.getProjectTasks().remove(projectTask);
         projectTask.setCompleted(projectTaskData.getCompleted());
+        System.out.println(projectTaskData.getCompleted());
 
-        project.getProjectTasks().add(projectTask);
-        projectRepository.save(project);
-        projectTaskRepository.updateProjectTaskById(id, projectTask.getCompleted());
+        projectTaskRepository.save(projectTask);
+        //projectTaskRepository.updateProjectTaskById(id, projectTask.getCompleted());
     }
 }

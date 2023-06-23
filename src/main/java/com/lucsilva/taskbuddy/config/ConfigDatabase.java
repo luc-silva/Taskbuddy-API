@@ -43,7 +43,7 @@ public class ConfigDatabase implements CommandLineRunner {
 
         UserAccount user1 = new UserAccount(null, "maria", "teste", "123");
         Project project1 = new Project(null, user1, "teste", "teste", new Date(), Priority.HIGH);
-        ProjectTask projectTask = new ProjectTask(null, "teste", Priority.HIGH, project1);
+        ProjectTask projectTask = new ProjectTask(null, "teste", Priority.HIGH, project1, false);
         project1.getProjectTasks().add(projectTask);
 
         //

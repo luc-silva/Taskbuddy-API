@@ -1,5 +1,6 @@
 package com.lucsilva.taskbuddy.resources;
 
+import com.lucsilva.taskbuddy.dto.response.ProjectTaskResponseDTO;
 import com.lucsilva.taskbuddy.entities.ProjectTask;
 import com.lucsilva.taskbuddy.services.ProjectService;
 import com.lucsilva.taskbuddy.services.ProjectTaskService;
@@ -16,6 +17,12 @@ public class ProjectTaskResource {
     ProjectTaskService projectTaskService;
     @Autowired
     ProjectService projectService;
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ProjectTaskResponseDTO> getProjectTask(@PathVariable Integer id){
+        ProjectTask projectTask = projectTaskService.getProjectTask(id);
+        return ResponseEntity.ok().body(ProjectTaskResponseDTO.convertToDto(projectTask));
+    }
 
     @PutMapping("/{id}")
     public ResponseEntity<ResponseMessage> updateProjectTask(@PathVariable Integer id, @RequestBody ProjectTask projectTask){

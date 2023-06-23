@@ -14,7 +14,7 @@ public class ProjectTask implements Serializable {
     Integer id;
     String title;
     Priority priority;
-    Boolean completed = false;
+    Boolean completed;
 
     @JsonIgnore
     @ManyToOne
@@ -22,13 +22,6 @@ public class ProjectTask implements Serializable {
     Project project;
 
     public ProjectTask() {
-    }
-
-    public ProjectTask(Integer id, String title, Priority priority, Project project) {
-        this.id = id;
-        this.title = title;
-        this.priority = priority;
-        this.project = project;
     }
 
     public ProjectTask(Integer id, String title, Priority priority, Project project, Boolean completed) {
@@ -64,7 +57,7 @@ public class ProjectTask implements Serializable {
     }
 
     public Boolean getCompleted() {
-        return completed;
+        return this.completed;
     }
 
     public void setCompleted(Boolean completed) {
