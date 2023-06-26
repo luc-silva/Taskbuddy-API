@@ -1,6 +1,5 @@
 package com.lucsilva.taskbuddy.dto.response;
 
-import com.lucsilva.taskbuddy.dto.request.UserAccountRequestDTO;
 import com.lucsilva.taskbuddy.entities.Todo;
 import com.lucsilva.taskbuddy.entities.enums.Priority;
 
@@ -9,6 +8,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class TodoResponseDTO {
+    Integer id;
     String text;
     Boolean concluded;
     Date deadline;
@@ -18,7 +18,8 @@ public class TodoResponseDTO {
     public TodoResponseDTO() {
     }
 
-    public TodoResponseDTO(String text, Boolean concluded, Date deadline, Priority priority, UserResponseDTO user) {
+    public TodoResponseDTO(Integer id, String text, Boolean concluded, Date deadline, Priority priority, UserResponseDTO user) {
+        this.id = id;
         this.text = text;
         this.concluded = concluded;
         this.deadline = deadline;
@@ -28,7 +29,7 @@ public class TodoResponseDTO {
 
     static public TodoResponseDTO covertToDTO(Todo todo){
         UserResponseDTO user = UserResponseDTO.convertToDto(todo.getUser());
-        return new TodoResponseDTO(todo.getText(), todo.getConcluded(), todo.getDeadline(), todo.getPriority(), user);
+        return new TodoResponseDTO(todo.getId(), todo.getText(), todo.getConcluded(), todo.getDeadline(), todo.getPriority(), user);
     }
 
     static public Set<TodoResponseDTO> convertSetToDto(Set<Todo> todos){
@@ -37,6 +38,14 @@ public class TodoResponseDTO {
             dtos.add(TodoResponseDTO.covertToDTO(todo));
         }
         return dtos;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getText() {
