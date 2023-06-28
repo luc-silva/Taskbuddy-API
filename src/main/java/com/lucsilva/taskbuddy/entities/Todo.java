@@ -1,7 +1,5 @@
 package com.lucsilva.taskbuddy.entities;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.lucsilva.taskbuddy.entities.enums.Priority;
 import jakarta.persistence.*;
 
@@ -16,11 +14,19 @@ public class Todo implements Serializable {
     Integer id;
 
     @ManyToOne
+    @JoinColumn(nullable = false)
     UserAccount user;
 
+    @Column(nullable = false)
     String text;
+
+    @Column(nullable = false)
     Boolean concluded;
+
+    @Column(nullable = false)
     Date deadline;
+
+    @Column(nullable = false)
     Priority priority;
 
     public Todo() {

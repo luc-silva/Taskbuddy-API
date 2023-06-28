@@ -1,7 +1,5 @@
 package com.lucsilva.taskbuddy.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.lucsilva.taskbuddy.dto.request.UserAccountRequestDTO;
 import com.lucsilva.taskbuddy.entities.enums.Priority;
 import jakarta.persistence.*;
 
@@ -18,36 +16,44 @@ public class Project implements Serializable {
     Integer id;
 
     @ManyToOne
-    @JoinColumn(name = "USER_ID")
+    @JoinColumn(name = "USER_ID", nullable = false)
     UserAccount user;
 
     @OneToMany(mappedBy = "project")
     Set<ProjectTask> projectTasks = new HashSet<>();
 
+    @Column(nullable = false)
     String title;
+    @Column(nullable = false)
     String description;
+    @Column(nullable = false)
     Date deadline;
+    @Column(nullable = false)
     Priority priority;
+    @Column(nullable = false)
+    Boolean concluded;
 
     public Project() {
     }
 
-    public Project(UserAccount user, Set<ProjectTask> pts, String title, String dt, Date dl, Priority p ){
+    public Project(UserAccount user, Set<ProjectTask> pts, String title, String dt, Date dl, Priority p, Boolean concluded ){
         this.user = user;
         getProjectTasks().addAll(pts);
         this.title = title;
         this.description = dt;
         this.deadline = dl;
         this.priority = p;
+        this.concluded = concluded;
     }
 
-    public Project(Integer id, UserAccount user, String title, String description, Date deadline, Priority priority) {
+    public Project(Integer id, UserAccount user, String title, String description, Date deadline, Priority priority, Boolean concluded ) {
         this.id = id;
         this.user = user;
         this.title = title;
         this.description = description;
         this.deadline = deadline;
         this.priority = priority;
+        this.concluded = concluded;
     }
 
     public Integer getId() {
@@ -96,6 +102,14 @@ public class Project implements Serializable {
 
     public Set<ProjectTask> getProjectTasks() {
         return projectTasks;
+    }
+
+    public Boolean getConcluded() {
+        return concluded;
+    }
+
+    public void setConcluded(Boolean concluded) {
+        this.concluded = concluded;
     }
 
     @Override

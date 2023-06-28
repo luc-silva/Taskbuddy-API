@@ -16,11 +16,12 @@ public class ProjectRequestDTO {
     String description;
     Date deadline;
     Priority priority;
+    Boolean concluded;
 
     public ProjectRequestDTO(){}
     public Project convertToObject(){
         UserAccount user = this.getUser().convertToObject();
-        return new Project(user, getProjectTasks(),getTitle(), getDescription(), getDeadline(), getPriority());
+        return new Project(user, getProjectTasks(),getTitle(), getDescription(), getDeadline(), getPriority(), getConcluded());
     }
 
     public UserAccountRequestDTO getUser() {
@@ -65,6 +66,14 @@ public class ProjectRequestDTO {
 
     public Priority getPriority() {
         return priority;
+    }
+
+    public Boolean getConcluded() {
+        return concluded;
+    }
+
+    public void setConcluded(Boolean concluded) {
+        this.concluded = concluded;
     }
 
     public void setPriority(Priority priority) {

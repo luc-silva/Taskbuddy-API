@@ -12,13 +12,16 @@ public class ProjectTask implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
+    @Column(nullable = false)
     String title;
+    @Column(nullable = false)
     Priority priority;
+    @Column(nullable = false)
     Boolean completed;
 
     @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "project_id")
+    @JoinColumn(name = "project_id", nullable = false)
     Project project;
 
     public ProjectTask() {

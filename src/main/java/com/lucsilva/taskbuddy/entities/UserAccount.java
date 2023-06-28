@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 
 import java.io.Serializable;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -14,8 +13,14 @@ public class UserAccount implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     Integer id;
+
+    @Column(nullable = false)
     String name;
+
+    @Column(unique = true, nullable = false)
     String email;
+
+    @Column(nullable = false)
     String password;
 
     @JsonIgnore
