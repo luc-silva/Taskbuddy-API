@@ -80,12 +80,12 @@ public class ProjectTask implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProjectTask that = (ProjectTask) o;
-        return Objects.equals(id, that.id);
+        return Objects.equals(id, that.id) && Objects.equals(title, that.title) && priority == that.priority && Objects.equals(completed, that.completed) && Objects.equals(project, that.project);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, title, priority, completed, project);
     }
 
     @Override

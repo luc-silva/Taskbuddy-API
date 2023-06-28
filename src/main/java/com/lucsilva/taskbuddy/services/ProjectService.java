@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 @Service
 public class ProjectService {
@@ -25,12 +27,22 @@ public class ProjectService {
     ProjectTaskRepository projectTaskRepository;
 
     public Project getProjectById(Integer id){
-        Optional<Project> project = projectRepository.findById(id);
-        if(project.isEmpty()){
+        Optional<Project> optionalProject = projectRepository.findById(id);
+        if(optionalProject.isEmpty()){
             throw new NotFound("Project not found.");
         }
+        Project project = optionalProject.get();
+        int completedTasks = 0;
 
-        return project.get();
+        for(ProjectTask pt : project.getProjectTasks()){
+            if(pt.getCompleted()){
+                completedTasks += 1;
+            }
+        }
+
+        project.setConcluded(project.getProjectTasks().size() == completedTasks);
+        projectRepository.save(project);
+        return project;
     }
 
     public void createProject(Project project) {

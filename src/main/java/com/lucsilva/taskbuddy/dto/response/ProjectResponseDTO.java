@@ -17,18 +17,21 @@ public class ProjectResponseDTO {
     Date deadline;
     Priority priority;
     UserResponseDTO user;
+    Boolean concluded;
     Set<ProjectTaskResponseDTO> projectTasks = new HashSet<>();
 
     public ProjectResponseDTO() {
     }
 
-    public ProjectResponseDTO(Integer id, String t, String d, Date deadline, Priority p, UserResponseDTO u, Set<ProjectTaskResponseDTO> pts) {
+    public ProjectResponseDTO(Integer id, String t, String d, Date deadline, Priority p, Boolean concluded, UserResponseDTO u,
+                              Set<ProjectTaskResponseDTO> pts) {
         this.id = id;
         this.title = t;
         this.description = d;
         this.deadline = deadline;
         this.priority = p;
         this.user = u;
+        this.concluded = concluded;
         projectTasks.addAll(pts);
     }
 
@@ -43,7 +46,7 @@ public class ProjectResponseDTO {
         }
 
         return new ProjectResponseDTO(p.getId(), p.getTitle(), p.getDescription(),
-                p.getDeadline(), p.getPriority(), userDto, ptsDto);
+                p.getDeadline(), p.getPriority(), p.getConcluded() ,userDto, ptsDto);
     }
 
     public static Set<ProjectResponseDTO> convertSetToDto(Set<Project> projects){
@@ -104,5 +107,13 @@ public class ProjectResponseDTO {
 
     public Set<ProjectTaskResponseDTO> getProjectTasks() {
         return projectTasks;
+    }
+
+    public Boolean getConcluded() {
+        return concluded;
+    }
+
+    public void setConcluded(Boolean concluded) {
+        this.concluded = concluded;
     }
 }
