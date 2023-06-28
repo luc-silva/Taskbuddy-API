@@ -45,5 +45,17 @@ public class TodoService {
         return todo.get();
     }
 
+    /*
+    public Integer countConcludedTodos(Integer id){
+        Optional<UserAccount> user = userRepository.findById(id);
+        if(user.isEmpty()){
+            throw new NotFound("User not found.");
+        }
 
+        return todoRepository.countConcludedTodos(id);
+    }
+
+    public Integer countTodos(Integer userId){
+        return todoRepository.countTodos(userId);
+    }*/
 }

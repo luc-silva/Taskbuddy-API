@@ -3,6 +3,7 @@ package com.lucsilva.taskbuddy.services;
 import com.lucsilva.taskbuddy.entities.Project;
 import com.lucsilva.taskbuddy.entities.Todo;
 import com.lucsilva.taskbuddy.entities.UserAccount;
+import com.lucsilva.taskbuddy.entities.UserStatus;
 import com.lucsilva.taskbuddy.exceptions.NotAuthenticated;
 import com.lucsilva.taskbuddy.repositories.ProjectRepository;
 import com.lucsilva.taskbuddy.repositories.TodoRepository;
@@ -63,4 +64,26 @@ public class UserService {
         return todoRepository.listUserTodos(user.getId());
     }
 
+    public UserStatus getUserStatus(Integer id){
+        UserStatus status = new UserStatus();
+
+        Integer projectTotal = projectRepository.countProjects(id);
+        Integer todoTotal = todoRepository.countTodos(id);
+
+        status.setProject_total(projectTotal);
+        status.setTodo_total(todoTotal);
+
+        Integer projectConcludedTotal = projectRepository.countConcludedProjects(id) ;
+        Integer todoConcludedTotal = todoRepository.countConcludedTodos(id) ;
+        status.setProject_concluded(projectConcludedTotal);
+        status.setTodo_concluded(todoConcludedTotal);
+
+        Double todoConclusionRate = (double) (todoConcludedTotal * todoTotal / 100);
+        Double projectConclusionRate = (double) (projectConcludedTotal* projectTotal / 100);
+
+        status.setProject_conclusion_rate(projectConclusionRate);
+        status.setTodo_conclusion_rate(todoConclusionRate);
+
+        return status;
+    }
 }

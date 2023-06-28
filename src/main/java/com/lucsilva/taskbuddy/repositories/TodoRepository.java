@@ -16,4 +16,10 @@ public interface TodoRepository extends JpaRepository<Todo, Integer> {
     @Modifying
     @Query("UPDATE Todo SET concluded = ?2 WHERE id = ?1")
     public void updateTodoById(Integer id, Boolean todoStatus);
+
+    @Query("SELECT COUNT(t.concluded) FROM Todo t WHERE t.user.id = ?1 and t.concluded = true")
+    public Integer countConcludedTodos(Integer userId);
+
+    @Query("SELECT COUNT(t) FROM Todo t WHERE t.user.id = ?1")
+    public Integer countTodos(Integer userId);
 }

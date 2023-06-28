@@ -79,7 +79,18 @@ public class ProjectService {
         } else {
             throw new NotFound("Project not found.");
         }
-
     }
 
+    public Integer countConcludedProjects(Integer userId){
+        Optional<UserAccount> user = userRepository.findById(userId);
+        if(user.isEmpty()){
+            throw new NotFound("User not found.");
+        }
+
+        return projectRepository.countConcludedProjects(userId);
+    }
+
+    /*public Integer countProjects(Integer userId){
+        return projectRepository.countProjects(userId);
+    }*/
 }

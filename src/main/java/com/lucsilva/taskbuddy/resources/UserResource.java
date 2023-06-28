@@ -4,9 +4,13 @@ import com.lucsilva.taskbuddy.dto.request.UserAccountRequestDTO;
 import com.lucsilva.taskbuddy.dto.response.ProjectResponseDTO;
 import com.lucsilva.taskbuddy.dto.response.TodoResponseDTO;
 import com.lucsilva.taskbuddy.dto.response.UserResponseDTO;
+import com.lucsilva.taskbuddy.dto.response.UserStatusDTO;
 import com.lucsilva.taskbuddy.entities.Project;
 import com.lucsilva.taskbuddy.entities.Todo;
 import com.lucsilva.taskbuddy.entities.UserAccount;
+import com.lucsilva.taskbuddy.entities.UserStatus;
+import com.lucsilva.taskbuddy.services.ProjectService;
+import com.lucsilva.taskbuddy.services.TodoService;
 import com.lucsilva.taskbuddy.services.UserService;
 import com.lucsilva.taskbuddy.utils.ResponseMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,4 +56,10 @@ public class UserResource {
         Set<Todo> todos = userService.listUserTodos(id);
         return ResponseEntity.ok().body(TodoResponseDTO.convertSetToDto(todos));
     }
+    @GetMapping("/{id}/status")
+    public ResponseEntity<UserStatusDTO> getUserStatus(@PathVariable Integer id){
+        UserStatus status = userService.getUserStatus(id);
+        return ResponseEntity.ok().body(UserStatusDTO.convertToDTO(status));
+    }
+
 }
