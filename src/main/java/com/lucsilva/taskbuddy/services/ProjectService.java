@@ -90,7 +90,7 @@ public class ProjectService {
         return projectRepository.countConcludedProjects(userId);
     }
 
-    /*public Integer countProjects(Integer userId){
+    public Integer countProjects(Integer userId){
         return projectRepository.countProjects(userId);
-    }*/
+    }
 }

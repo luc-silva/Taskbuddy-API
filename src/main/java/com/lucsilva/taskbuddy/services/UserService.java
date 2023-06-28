@@ -63,6 +63,15 @@ public class UserService {
 
         return todoRepository.listUserTodos(user.getId());
     }
+    public Set<Todo> getImportantTodos(Integer userId){
+        Optional<UserAccount> userAccount = userRepository.findById(userId);
+        if(userAccount.isEmpty()){
+            throw new NotFound("User not found.");
+        }
+        UserAccount user = userAccount.get();
+
+        return todoRepository.getImportantTodosByUserId(user.getId());
+    }
 
     public UserStatus getUserStatus(Integer id){
         UserStatus status = new UserStatus();

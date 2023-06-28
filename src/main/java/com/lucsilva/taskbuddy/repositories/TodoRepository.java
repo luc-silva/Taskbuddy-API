@@ -22,4 +22,7 @@ public interface TodoRepository extends JpaRepository<Todo, Integer> {
 
     @Query("SELECT COUNT(t) FROM Todo t WHERE t.user.id = ?1")
     public Integer countTodos(Integer userId);
+
+    @Query("SELECT td FROM Todo td WHERE td.user.id = ?1 AND (td.priority = 2 OR td.priority = 3)")
+    public Set<Todo> getImportantTodosByUserId(Integer id);
 }

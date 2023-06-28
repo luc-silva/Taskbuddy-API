@@ -45,7 +45,6 @@ public class TodoService {
         return todo.get();
     }
 
-    /*
     public Integer countConcludedTodos(Integer id){
         Optional<UserAccount> user = userRepository.findById(id);
         if(user.isEmpty()){
@@ -57,5 +56,7 @@ public class TodoService {
 
     public Integer countTodos(Integer userId){
         return todoRepository.countTodos(userId);
-    }*/
+    }
+
+
 }

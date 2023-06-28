@@ -56,6 +56,13 @@ public class UserResource {
         Set<Todo> todos = userService.listUserTodos(id);
         return ResponseEntity.ok().body(TodoResponseDTO.convertSetToDto(todos));
     }
+
+    @GetMapping("/{id}/todos/important")
+    public ResponseEntity<Set<TodoResponseDTO>> getUserImportantTodos(@PathVariable Integer id){
+        Set<Todo> todos = userService.getImportantTodos(id);
+        return ResponseEntity.ok().body(TodoResponseDTO.convertSetToDto(todos));
+    }
+
     @GetMapping("/{id}/status")
     public ResponseEntity<UserStatusDTO> getUserStatus(@PathVariable Integer id){
         UserStatus status = userService.getUserStatus(id);
