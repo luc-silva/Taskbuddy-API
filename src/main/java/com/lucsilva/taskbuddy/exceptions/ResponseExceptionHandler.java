@@ -1,7 +1,6 @@
 package com.lucsilva.taskbuddy.exceptions;
 
-import com.lucsilva.taskbuddy.exceptions.ErrorResponseBody;
-import com.lucsilva.taskbuddy.exceptions.NotFound;
+import org.hibernate.PropertyValueException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -26,6 +25,12 @@ public class ResponseExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> handleUnauthorizedAccess(NotAuthenticated e) {
         ErrorResponseBody erb = new ErrorResponseBody(e.getMessage(), HttpStatus.UNAUTHORIZED);
         return new ResponseEntity<>(erb, HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(value = PropertyValueException.class)
+    public ResponseEntity<?> genericResponse(PropertyValueException e) {
+        ErrorResponseBody erb = new ErrorResponseBody(e.getMessage(), HttpStatus.BAD_GATEWAY);
+        return new ResponseEntity<>(erb, HttpStatus.BAD_GATEWAY);
     }
 
 }
