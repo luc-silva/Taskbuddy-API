@@ -10,7 +10,7 @@ import java.util.Objects;
 @Entity
 public class Todo implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
     @ManyToOne

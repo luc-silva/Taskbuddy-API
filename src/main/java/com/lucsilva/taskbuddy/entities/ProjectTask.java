@@ -10,7 +10,7 @@ import java.util.Objects;
 @Entity
 public class ProjectTask implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
     @Column(nullable = false)
     String title;

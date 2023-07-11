@@ -11,7 +11,7 @@ import java.util.Set;
 @Entity
 public class UserAccount implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer id;
 
     @Column(nullable = false)
